@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
     <ImageView
         android:layout_width="100dp"
@@ -13,7 +13,7 @@
         android:src="@drawable/ic_gold" />
 
     <GridLayout
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:columnCount="3"
         android:rowCount="4">
@@ -36,15 +36,15 @@
 
         <TextView
             style="@style/TextView"
-            tools:text="Buy" />
+            android:text="@string/buy" />
 
         <TextView
             style="@style/TextView"
-            tools:text="Sell" />
+            android:text="@string/sell" />
 
         <TextView
             style="@style/TextView"
-            tools:text="Gold" />
+            android:text="@string/gold" />
 
         <TextView
             android:id="@+id/tv_gold_buy"
@@ -58,7 +58,7 @@
 
         <TextView
             style="@style/TextView"
-            tools:text="Gold bar" />
+            android:text="@string/gold_bar" />
 
         <TextView
             android:id="@+id/tv_gold_bar_buy"

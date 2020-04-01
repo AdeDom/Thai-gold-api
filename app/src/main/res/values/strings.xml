@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Thai gold api</string>
+    <string name="buy">Buy</string>
+    <string name="sell">Sell</string>
+    <string name="gold">Gold</string>
+    <string name="gold_bar">Gold bar</string>
 </resources>
