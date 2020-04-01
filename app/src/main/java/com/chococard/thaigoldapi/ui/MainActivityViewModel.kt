@@ -15,11 +15,11 @@ class MainActivityViewModel(private val repository: GoldRepository) : ViewModel(
 //    val gold: LiveData<Response>
 //        get() = _gold
 
-    fun getGold() {
+    fun fetchGold() {
         goldListener?.onStarted()
         job = Coroutines.main {
             try {
-                val goldResponse = repository.getGold()
+                val goldResponse = repository.fetchGold()
                 goldResponse.response?.let {
 //                    _gold.value = it
                     goldListener?.onSuccess(it)

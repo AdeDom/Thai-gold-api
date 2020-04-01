@@ -5,6 +5,6 @@ import com.chococard.thaigoldapi.data.networks.SafeApiRequest
 
 class GoldRepository(private val api: GoldApi) : SafeApiRequest() {
 
-    suspend fun getGold() = apiRequest { api.getGold() }
+    suspend fun fetchGold() = apiRequest { api.fetchGold() }
 
 }

@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity(), GoldListener {
 
         viewModel.goldListener = this
 
-        viewModel.getGold()
+        viewModel.fetchGold()
 //        progress_bar.show()
 //        viewModel.gold.observe(this, Observer {
 //            progress_bar.hide()

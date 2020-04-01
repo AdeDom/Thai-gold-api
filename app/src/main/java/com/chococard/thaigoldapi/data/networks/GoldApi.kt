@@ -11,7 +11,7 @@ import retrofit2.http.GET
 interface GoldApi {
 
     @GET("latest")
-    suspend fun getGold(): Response<GoldResponse>
+    suspend fun fetchGold(): Response<GoldResponse>
 
     companion object {
         operator fun invoke(): GoldApi {
