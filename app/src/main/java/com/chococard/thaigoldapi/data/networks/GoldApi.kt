@@ -21,7 +21,6 @@ interface GoldApi {
                 .build()
                 .create(GoldApi::class.java)
         }
-
     }
 
 }

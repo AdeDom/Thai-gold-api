@@ -4,4 +4,7 @@
     <string name="sell">Sell</string>
     <string name="gold">Gold</string>
     <string name="gold_bar">Gold bar</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="price">Price</string>
 </resources>

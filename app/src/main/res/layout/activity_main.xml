@@ -1,34 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
     tools:context=".ui.MainActivity">
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/ic_gold" />
-
     <GridLayout
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
         android:columnCount="3"
-        android:rowCount="4">
+        android:rowCount="5">
+
+        <ImageView
+            android:layout_width="@dimen/img_logo"
+            android:layout_height="@dimen/img_logo"
+            android:layout_columnSpan="3"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_gold" />
 
         <TextView
             android:id="@+id/tv_date"
             style="@style/TextView"
             android:layout_columnSpan="3"
-            tools:text="01 เมษายน 2563" />
+            android:text="@string/date" />
 
         <TextView
             android:id="@+id/tv_update_time"
             style="@style/TextView"
             android:layout_columnSpan="3"
-            tools:text="เวลา 09:26 น." />
+            android:text="@string/time" />
 
         <TextView
             style="@style/TextView"
@@ -49,12 +50,12 @@
         <TextView
             android:id="@+id/tv_gold_buy"
             style="@style/TextView"
-            tools:text="25,150.00" />
+            android:text="@string/price" />
 
         <TextView
             android:id="@+id/tv_gold_sell"
             style="@style/TextView"
-            tools:text="24,013.44" />
+            android:text="@string/price" />
 
         <TextView
             style="@style/TextView"
@@ -63,13 +64,20 @@
         <TextView
             android:id="@+id/tv_gold_bar_buy"
             style="@style/TextView"
-            tools:text="24,650.00" />
+            android:text="@string/price" />
 
         <TextView
             android:id="@+id/tv_gold_bar_sell"
             style="@style/TextView"
-            tools:text="24,450.00" />
+            android:text="@string/price" />
 
     </GridLayout>
 
-</LinearLayout>
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="invisible" />
+
+</RelativeLayout>
