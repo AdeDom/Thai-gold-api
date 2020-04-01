@@ -1,7 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"/>
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/ic_gold" />
+
+    <GridLayout
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:columnCount="3"
+        android:rowCount="4">
+
+        <TextView
+            style="@style/TextView"
+            android:layout_columnSpan="3"
+            tools:text="01 เมษายน 2563" />
+
+        <TextView
+            style="@style/TextView"
+            android:layout_columnSpan="3"
+            tools:text="เวลา 09:26 น." />
+
+        <TextView
+            style="@style/TextView"
+            android:layout_columnWeight="33" />
+
+        <TextView
+            style="@style/TextView"
+            tools:text="Buy" />
+
+        <TextView
+            style="@style/TextView"
+            tools:text="Sell" />
+
+        <TextView
+            style="@style/TextView"
+            tools:text="gold" />
+
+        <TextView
+            style="@style/TextView"
+            tools:text="25,150.00" />
+
+        <TextView
+            style="@style/TextView"
+            tools:text="24,013.44" />
+
+
+        <TextView
+            style="@style/TextView"
+            tools:text="gold bar" />
+
+        <TextView
+            style="@style/TextView"
+            tools:text="24,650.00" />
+
+        <TextView
+            style="@style/TextView"
+            tools:text="24,450.00" />
+
+    </GridLayout>
+
+</LinearLayout>
