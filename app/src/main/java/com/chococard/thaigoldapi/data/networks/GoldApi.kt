@@ -1,6 +1,7 @@
 package com.chococard.thaigoldapi.data.networks
 
 import com.chococard.thaigoldapi.data.networks.response.GoldResponse
+import okhttp3.OkHttpClient
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -14,10 +15,17 @@ interface GoldApi {
     suspend fun fetchGold(): Response<GoldResponse>
 
     companion object {
-        operator fun invoke(): GoldApi {
+        operator fun invoke(
+            networkConnectionInterceptor: NetworkConnectionInterceptor
+        ): GoldApi {
+            val okHttpClient = OkHttpClient.Builder()
+                .addInterceptor(networkConnectionInterceptor)
+                .build()
+
             return Retrofit.Builder()
-                .addConverterFactory(GsonConverterFactory.create())
+                .client(okHttpClient)
                 .baseUrl("https://thai-gold-api.herokuapp.com/")
+                .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(GoldApi::class.java)
         }

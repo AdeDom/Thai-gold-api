@@ -1,12 +1,12 @@
 package com.chococard.thaigoldapi.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.chococard.thaigoldapi.R
-import com.chococard.thaigoldapi.data.models.Response
 import com.chococard.thaigoldapi.data.networks.GoldApi
+import com.chococard.thaigoldapi.data.networks.NetworkConnectionInterceptor
 import com.chococard.thaigoldapi.data.repositories.GoldRepository
 import com.chococard.thaigoldapi.util.extension.hide
 import com.chococard.thaigoldapi.util.extension.show
@@ -21,7 +21,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val factory = MainActivityFactory(GoldRepository(GoldApi.invoke()))
+        val interceptor = NetworkConnectionInterceptor(baseContext)
+        val factory = MainActivityFactory(GoldRepository(GoldApi.invoke(interceptor)))
         viewModel = ViewModelProvider(this, factory).get(MainActivityViewModel::class.java)
 
         viewModel.fetchGold()
@@ -35,6 +36,11 @@ class MainActivity : AppCompatActivity() {
             tv_gold_bar_buy.text = it.price?.goldBar?.buy
             tv_gold_bar_sell.text = it.price?.goldBar?.sell
         })
+
+        viewModel.exception = {
+            progress_bar.hide()
+            toast(it)
+        }
 
     }
 
