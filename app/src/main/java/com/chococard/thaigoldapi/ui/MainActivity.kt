@@ -5,15 +5,17 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.chococard.thaigoldapi.R
-import com.chococard.thaigoldapi.data.networks.GoldApi
-import com.chococard.thaigoldapi.data.networks.NetworkConnectionInterceptor
-import com.chococard.thaigoldapi.data.repositories.GoldRepository
 import com.chococard.thaigoldapi.util.extension.hide
 import com.chococard.thaigoldapi.util.extension.show
 import com.chococard.thaigoldapi.util.extension.toast
 import kotlinx.android.synthetic.main.activity_main.*
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.kodein
+import org.kodein.di.generic.instance
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), KodeinAware {
+
+    override val kodein by kodein()
 
     private lateinit var viewModel: MainActivityViewModel
 
@@ -21,8 +23,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val interceptor = NetworkConnectionInterceptor(baseContext)
-        val factory = MainActivityFactory(GoldRepository(GoldApi.invoke(interceptor)))
+        val factory: MainActivityFactory by instance()
         viewModel = ViewModelProvider(this, factory).get(MainActivityViewModel::class.java)
 
         viewModel.fetchGold()
