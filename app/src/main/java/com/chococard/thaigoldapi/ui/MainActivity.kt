@@ -38,9 +38,9 @@ class MainActivity : AppCompatActivity(), KodeinAware {
             tv_gold_bar_sell.text = it.price?.goldBar?.sell
         })
 
-        viewModel.exception = {
+        viewModel.error = { message ->
             progress_bar.hide()
-            toast(it)
+            message?.let { toast(it) }
         }
 
     }

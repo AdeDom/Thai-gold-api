@@ -6,38 +6,41 @@ import androidx.lifecycle.ViewModel
 import com.chococard.thaigoldapi.data.models.Response
 import com.chococard.thaigoldapi.data.repositories.GoldRepository
 import com.chococard.thaigoldapi.util.ApiException
-import com.chococard.thaigoldapi.util.Coroutines
 import com.chococard.thaigoldapi.util.NoInternetException
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
 
-class MainActivityViewModel(private val repository: GoldRepository) : ViewModel() {
+class MainActivityViewModel(private val repository: GoldRepository) : ViewModel(), CoroutineScope {
 
-    private lateinit var job: Job
+    private val job = Job()
 
-    var exception: ((String) -> Unit)? = null
+    var error: ((String?) -> Unit)? = null
 
     private val _gold = MutableLiveData<Response>()
     val gold: LiveData<Response>
         get() = _gold
 
     fun fetchGold() {
-        job = Coroutines.main {
+        launch {
             try {
-                val goldResponse = repository.fetchGold()
-                goldResponse.response?.let {
-                    _gold.value = it
-                }
+                val goldResponse = CoroutineScope(Dispatchers.IO).async {
+                    repository.fetchGold()
+                }.await()
+                _gold.value = goldResponse.response
             } catch (e: ApiException) {
-                exception?.invoke(e.message!!)
+                error?.invoke(e.message)
             } catch (e: NoInternetException) {
-                exception?.invoke(e.message!!)
+                error?.invoke(e.message)
             }
         }
     }
 
     override fun onCleared() {
         super.onCleared()
-        if (::job.isInitialized) job.cancel()
+        job.cancel()
     }
+
+    override val coroutineContext: CoroutineContext
+        get() = job + Dispatchers.Main
 
 }
