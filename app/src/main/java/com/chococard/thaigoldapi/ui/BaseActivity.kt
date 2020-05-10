@@ -17,7 +17,7 @@ abstract class BaseActivity<VM : ViewModel> : AppCompatActivity(), KodeinAware {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val factory: BaseViewModelFactory by instance()
+        val factory: BaseViewModelFactory by instance<BaseViewModelFactory>()
         viewModel = ViewModelProvider(this, factory).get(viewModel())
     }
 
