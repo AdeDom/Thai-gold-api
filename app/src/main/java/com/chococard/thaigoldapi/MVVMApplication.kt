@@ -4,7 +4,7 @@ import android.app.Application
 import com.chococard.thaigoldapi.data.networks.GoldApi
 import com.chococard.thaigoldapi.data.networks.NetworkConnectionInterceptor
 import com.chococard.thaigoldapi.data.repositories.GoldRepository
-import com.chococard.thaigoldapi.ui.MainActivityFactory
+import com.chococard.thaigoldapi.ui.BaseViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -21,7 +21,7 @@ class MVVMApplication : Application(), KodeinAware {
         bind() from singleton { NetworkConnectionInterceptor(instance()) }
         bind() from singleton { GoldApi(instance()) }
         bind() from singleton { GoldRepository(instance()) }
-        bind() from provider { MainActivityFactory(instance()) }
+        bind() from provider { BaseViewModelFactory(instance()) }
     }
 
 }

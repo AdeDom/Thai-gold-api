@@ -1,30 +1,20 @@
 package com.chococard.thaigoldapi.ui
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import com.chococard.thaigoldapi.R
 import com.chococard.thaigoldapi.util.extension.hide
 import com.chococard.thaigoldapi.util.extension.show
 import com.chococard.thaigoldapi.util.extension.toast
 import kotlinx.android.synthetic.main.activity_main.*
-import org.kodein.di.KodeinAware
-import org.kodein.di.android.kodein
-import org.kodein.di.generic.instance
 
-class MainActivity : AppCompatActivity(), KodeinAware {
+class MainActivity : BaseActivity<MainActivityViewModel>() {
 
-    override val kodein by kodein()
-
-    private lateinit var viewModel: MainActivityViewModel
+    override fun viewModel() = MainActivityViewModel::class.java
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val factory: MainActivityFactory by instance()
-        viewModel = ViewModelProvider(this, factory).get(MainActivityViewModel::class.java)
 
         viewModel.fetchGold()
         progress_bar.show()
@@ -42,7 +32,6 @@ class MainActivity : AppCompatActivity(), KodeinAware {
             progress_bar.hide()
             message?.let { toast(it) }
         }
-
     }
 
 }
