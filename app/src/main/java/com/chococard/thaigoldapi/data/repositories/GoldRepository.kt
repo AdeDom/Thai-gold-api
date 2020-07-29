@@ -1,10 +1,9 @@
 package com.chococard.thaigoldapi.data.repositories
 
-import com.chococard.thaigoldapi.data.networks.GoldApi
-import com.chococard.thaigoldapi.data.networks.SafeApiRequest
+import com.chococard.thaigoldapi.data.networks.response.GoldResponse
 
-class GoldRepository(private val api: GoldApi) : SafeApiRequest() {
+interface GoldRepository {
 
-    suspend fun fetchGold() = apiRequest { api.fetchGold() }
+    suspend fun fetchGold(): GoldResponse
 
 }
